@@ -16,7 +16,6 @@ export default class Index extends Component {
         view.setResizeCallback(() => this.responsive())
         this.responsive()
         DataManager.instance.loadingRate = 0
-        console.log('log:::Index', 'onLoad')
     }
 
     async start() {

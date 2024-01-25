@@ -26,6 +26,8 @@ export default class ChessBoard extends Component {
         for (let n = 1; n <= pairs; n++) {
             for (let m = 0; m < some; m++) numArr.push(n)
         }
+      
+       this.node.setPosition(0, 0, 0)
         // 简单随机
         numArr = shuffle(numArr)
         for (let x = 0; x < xn; x++) {

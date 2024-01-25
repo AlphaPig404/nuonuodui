@@ -1,4 +1,4 @@
-import { Label, Node, ParticleSystem, Tween, UIOpacity, _decorator, color, find, tween, v3 } from "cc";
+import { Label, Node, ParticleSystem, ParticleSystem2D, Tween, UIOpacity, _decorator, color, find, tween, v3 } from "cc";
 import { ENUM_AUDIO_CLIP, ENUM_GAME_STATUS, ENUM_UI_TYPE } from "../Enum";
 import AudioManager from "../manager/AudioManager";
 import DataManager from "../manager/DataManager";
@@ -107,7 +107,7 @@ export default class MainLayer extends BaseLayer {
             this.comboTimerNumOpacity.opacity = 0
             comboLabel.unscheduleAllCallbacks()
         } else {
-            this.particle.getComponent(ParticleSystem).clear()
+            this.particle.getComponent(ParticleSystem2D).resetSystem()
             scoreLabel.string = `${DataManager.instance.score}`
             // 开启连接加成倒计时
             this.comboTimerNumOpacity.opacity = 255

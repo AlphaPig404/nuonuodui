@@ -26,10 +26,8 @@ export default class ResourceManager {
     }
 
     public async loadRes(resource: any, ratio: number = 0) {
-      console.log('log:::loadRes', resource)
         return new Promise<void>((resolve, reject) => {
             const rate = DataManager.instance.loadingRate
-            console.log('log:::loadRes', resource.path, resource.content)
             resources.loadDir(resource.path, resource.content, (finished: number, total: number) => {
                 // 资源加载进度
                 if (resource.ratio > 0) {
@@ -38,7 +36,6 @@ export default class ResourceManager {
                     DataManager.instance.loadingRate = Math.max(loadingRate, DataManager.instance.loadingRate)
                 }
             }, (err, assets: any) => {
-              console.log('log:::loadRes',assets )
                 if (err) reject && reject()
                 let asset: any
                 if (resource.type == 'audio') {

@@ -199,7 +199,12 @@ export default class GameManager extends Component {
         if (DataManager.instance.tipChesses.length) {
             for (let i = 0; i < DataManager.instance.tipChesses.length; i++) {
                 const chess = DataManager.instance.tipChesses[i]
-                if (i == 0) chess.setEffect('eff_hand', true)
+                if (i == 0) {
+                  chess.setEffect('eff_hand', true)
+                  // DataManager.instance.zIndex += 1
+                  chess.node.setSiblingIndex(DataManager.instance.chessNums.total)
+                  console.log('log:::eff_hand', DataManager.instance.chessNums.total)
+                }
                 chess.setEffect('eff_tip', true)
             }
         } else {

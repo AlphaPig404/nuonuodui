@@ -64,6 +64,7 @@ export function getAngle(start: Vec2, end: Vec2) {
   const dir = v2(dx, dy);
   //根据朝向计算出夹角弧度
   const angle = dir.signAngle(v2(1, 0));
+  console.log('log:::dir', dir, angle)
   //将弧度转换为欧拉角
   const degree = angle / Math.PI * 180;
   return -degree

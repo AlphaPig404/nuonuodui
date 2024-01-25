@@ -1,4 +1,4 @@
-import { Animation, Component, Event, EventTouch, Label, Node, Sprite, Touch, Vec2, Vec3, _decorator, tween, v2, v3} from "cc";
+import { Animation, Component, Event, EventTouch, Label, Node, Sprite, Touch, UITransform, Vec2, Vec3, _decorator, tween, v2, v3} from "cc";
 import { ENUM_AUDIO_CLIP, ENUM_GAME_MODE } from "../Enum";
 import { StaticInstance } from "../StaticInstance";
 import { getAngle, getDistance, getXYFromPos } from "../Utils";
@@ -73,16 +73,17 @@ export default class Chess extends Component {
     }
 
     onTouchStart(e: Touch) {
+      console.log('log:::onTouchStart')
         if (this.isClear || DataManager.instance.isChecking || DataManager.instance.isShuffling || DataManager.instance.isTouching) return
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.TOUCH)
         DataManager.instance.isTouching = true
         DataManager.instance.currentChess = this
         DataManager.instance.tipTime = 0
         const touchPos = e.getLocation()
-        // const pos = this.node.parent.getPosition(v3(touchPos.x, touchPos.y, 0))
-        this.touchPos = touchPos
-        const pos = this.node.getPosition()
-        this.startPos = v2(pos.x, pos.y)
+        const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y, 0))
+        this.touchPos = v2(pos.x, pos.y)
+        const startPos = this.node.getPosition()
+        this.startPos = v2(startPos.x, startPos.y)
         this.setEffect('eff_touch', true)
         // 取消提示eff
         for (let i = 0; i < DataManager.instance.tipChesses.length; i++) {
@@ -97,7 +98,8 @@ export default class Chess extends Component {
         if (this.isClear || DataManager.instance.activeChesses || DataManager.instance.isChecking || DataManager.instance.isShuffling) return
         if (DataManager.instance.currentChess == this) {
             const touchPos = e.getLocation()
-            const pos = this.node.parent.getPosition()
+            const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y, 0))
+            console.log('log:::e', pos, touchPos)
             // 开始移动
             if (this.isMoving) {
                 // front移动
@@ -141,20 +143,28 @@ export default class Chess extends Component {
             // 判断是否可以移动
             if (this.moveDir.x != 0 || this.moveDir.y != 0) {
                 const chesses = this.searchMove()
+                console.log('log:::chesses', chesses)
                 if (chesses) {
                     DataManager.instance.frontChesses = chesses.frontChesses
                     DataManager.instance.backChesses = chesses.backChesses
                     this.isMoving = true
                     DataManager.instance.zIndex += 1
-                    DataManager.instance.frontChesses.forEach(chess => chess.node.setSiblingIndex(DataManager.instance.zIndex))
+                    DataManager.instance.frontChesses.forEach(chess => chess.node.setSiblingIndex(DataManager.instance.chessNums.total))
+                    console.log('log:::zIndex', DataManager.instance.zIndex)
                 }
                 return
             }
             // 判断移动方向
             if (this.touchPos) {
                 const dis = getDistance(this.touchPos, v2(pos.x, pos.y))
+                console.log('log:::dis', dis)
                 if (dis >= this.moveSafetyDis) {
                     const angle = Math.abs(getAngle(this.touchPos, v2(pos.x, pos.y)))
+                    console.log('log:::angle', {
+                      angle,
+                      x: this.touchPos.x - pos.x,
+                      y: this.touchPos.y - pos.y
+                    })
                     if (angle > 45 && angle < 135) {
                         this.moveDir.x = 0
                         if (this.touchPos.y - pos.y > 0) {
@@ -267,6 +277,7 @@ export default class Chess extends Component {
             let count = 0
             chesses.forEach(chess => {
                 chess.node.getChildByName('eff_score').getComponent(Label).string = `${eff_score}`
+                chess.node.setSiblingIndex(DataManager.instance.chessNums.total)
                 chess.setEffect('eff_score', true)
                 const act1 = tween(chess.node).to(0.1, {scale: v3(0, 1, 0)})
                 const act2 = tween(chess.node).call(() => {
