@@ -80,7 +80,7 @@ export function getXYFromPos(px: number, py: number, width: number, height: numb
 
 // 把节点1转节点2坐标
 export function toXY(node1: Node, node2: Node) {
-  const wpos = node1.getWorldPosition(v3(0, 0,0))
+  const wpos = node1.getWorldPosition(v3(0, 0))
   const pos = node2.getWorldPosition(wpos)
   return pos
 }
@@ -114,11 +114,11 @@ export function getNodeContentSize(node: Node){
 }
 
 export function setNodePositionX(node: Node, x: number){
-  return node.setPosition(v3(x, node.position.y, 0))
+  return node.setPosition(v3(x, node.position.y))
 }
 
 export function setNodePositionY(node: Node, y: number){
-  return node.setPosition(v3(node.position.x, y, 0))
+  return node.setPosition(v3(node.position.x, y))
 }
 
 export function accNodePositionX(node: Node, x: number){

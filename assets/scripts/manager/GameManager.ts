@@ -128,9 +128,7 @@ export default class GameManager extends Component {
         let count = 0
         for (let i = 0; i < frontChesses.length; i++) {
             if (isAnim) {
-              const _tween = tween(frontChesses[i].node)
-                const act1 = _tween.to(0.15, {scale: v3(0.3, 0.3, 0)})
-                const act2 = _tween.call(() => {
+              tween(frontChesses[i].node).to(0.15, {scale: v3(0.3, 0.3, 1)}).call(() => {
                     const random = Math.floor(Math.random() * frontChesses.length)
                     // 结构避免引用赋值
                     const { x: x1, y: y1 } = frontChesses[i]
@@ -138,9 +136,7 @@ export default class GameManager extends Component {
                     // 交换
                     frontChesses[i].resetChess(x2, y2, frontChesses[i])
                     frontChesses[random].resetChess(x1, y1, frontChesses[random])
-                })
-                const act3 = _tween.to(0.15, {scale: v3(1, 1, 0)})
-                tween(frontChesses[i].node).sequence(act1, act2, act3).call(() => {
+                }).to(0.15, {scale: v3(1, 1, 1)}).call(() => {
                     count += 1
                     if (count == frontChesses.length) {
                         DataManager.instance.isShuffling = false

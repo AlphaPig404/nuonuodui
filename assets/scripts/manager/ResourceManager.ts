@@ -1,4 +1,3 @@
-// Created by carolsail
 import { resources } from 'cc';
 import DataManager from './DataManager';
 import PoolManager from './PoolManager';

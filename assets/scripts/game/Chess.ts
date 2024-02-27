@@ -63,7 +63,7 @@ export default class Chess extends Component {
         if (isAnim) {
             anim.play()
         } else {
-            this.node.setScale(v3(1,1,0))
+            this.node.setScale(v3(1, 1, 1))
             anim.stop()
         }
     }
@@ -80,7 +80,7 @@ export default class Chess extends Component {
         DataManager.instance.currentChess = this
         DataManager.instance.tipTime = 0
         const touchPos = e.getLocation()
-        const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y, 0))
+        const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y))
         this.touchPos = v2(pos.x, pos.y)
         const startPos = this.node.getPosition()
         this.startPos = v2(startPos.x, startPos.y)
@@ -98,7 +98,7 @@ export default class Chess extends Component {
         if (this.isClear || DataManager.instance.activeChesses || DataManager.instance.isChecking || DataManager.instance.isShuffling) return
         if (DataManager.instance.currentChess == this) {
             const touchPos = e.getLocation()
-            const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y, 0))
+            const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y))
             console.log('log:::e', pos, touchPos)
             // 开始移动
             if (this.isMoving) {
@@ -244,7 +244,7 @@ export default class Chess extends Component {
                 if (chessArr.length) {
                     let count = 0
                     chessArr.forEach(chess => {
-                        const position = v3(chess.startPos.x, chess.startPos.y, 0)
+                        const position = v3(chess.startPos.x, chess.startPos.y)
                         tween(chess.node).to(0.1, {position: position}).call(() => {
                             // 更新棋盘信息: 恢复
                             const { x, y } = getXYFromPos(chess.node.position.x, chess.node.position.y, CHESS_INFO.width, CHESS_INFO.height)
@@ -279,12 +279,9 @@ export default class Chess extends Component {
                 chess.node.getChildByName('eff_score').getComponent(Label).string = `${eff_score}`
                 chess.node.setSiblingIndex(DataManager.instance.chessNums.total)
                 chess.setEffect('eff_score', true)
-                const act1 = tween(chess.node).to(0.1, {scale: v3(0, 1, 0)})
-                const act2 = tween(chess.node).call(() => {
+                tween(chess.node).to(0.1, {scale: v3(0, 1, 1)}).call(() => {
                   chess.setClear()
-                })
-                const act3 = tween(chess.node).to(0.1, {scale: v3(1, 1, 0)})
-                tween(chess.node).sequence(act1, act2, act3).call(() => {
+                }).to(0.1, {scale: v3(1, 1, 1)}).call(() => {
                     if (count == 0) {
                         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLERE)
                         if (DataManager.instance.mode == ENUM_GAME_MODE.SCORE) {
@@ -618,7 +615,7 @@ export default class Chess extends Component {
             const chess = DataManager.instance.backChesses[j]
             if (!(chess.startPos.x == chess.node.position.x && chess.startPos.y == chess.node.position.y)) {
                 AudioManager.instance.playSound(ENUM_AUDIO_CLIP.MOVE)
-                chess.node.setPosition(v3(chess.startPos.x, chess.startPos.y, 0))
+                chess.node.setPosition(v3(chess.startPos.x, chess.startPos.y))
             }
         }
     }

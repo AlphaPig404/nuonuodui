@@ -20,7 +20,7 @@ export default class MainLayer extends BaseLayer {
     particle: Node = null
     comboTimer: Node = null
     comboTimerNum: Node = null
-    comboTimerNumOpacity: UIOpacity
+    comboTimerOpacity: UIOpacity
 
     onLoad() {
         this.btnPause = find('btn_pause', this.node)
@@ -34,7 +34,7 @@ export default class MainLayer extends BaseLayer {
         this.particle = find('bar_score/particle', this.node)
         this.comboTimer = find('combo_timer', this.node)
         this.comboTimerNum = find('timer/nums', this.comboTimer)
-        this.comboTimerNumOpacity = this.comboTimerNum.getComponent(UIOpacity)
+        this.comboTimerOpacity = this.comboTimer.getComponent(UIOpacity)
     }
 
     onDestroy() {
@@ -91,12 +91,8 @@ export default class MainLayer extends BaseLayer {
 
     setLevelUpNotice() {
         Tween.stopAllByTarget(this.levelUpNode)
-        const _tween = tween(this.levelUpNode)
-        this.levelUpNode.setPosition(v3(600, this.levelUpNode.position.y, 0))
-        const act1 = _tween.to(0.5, {position: v3(0, this.levelUpNode.position.y, 0)})
-        const act2 = _tween.delay(1)
-        const act3 = _tween.to(0.5, {position: v3(-600, this.levelUpNode.position.y, 0)})
-        tween(this.levelUpNode).sequence(act1, act2, act3).start()
+        this.levelUpNode.setPosition(v3(600, this.levelUpNode.position.y))
+        tween(this.levelUpNode).to(0.5, {position: v3(0, this.levelUpNode.position.y, 1)}).delay(1).to(0.5, {position: v3(-600, this.levelUpNode.position.y)}).start()
     }
 
     setScoreNum(isInit: boolean) {
@@ -104,13 +100,13 @@ export default class MainLayer extends BaseLayer {
         const comboLabel = this.comboTimerNum.getComponent(Label)
         if (isInit) {
             scoreLabel.string = `${DataManager.instance.score}`
-            this.comboTimerNumOpacity.opacity = 0
+            this.comboTimerOpacity.opacity = 0
             comboLabel.unscheduleAllCallbacks()
         } else {
             this.particle.getComponent(ParticleSystem2D).resetSystem()
             scoreLabel.string = `${DataManager.instance.score}`
             // 开启连接加成倒计时
-            this.comboTimerNumOpacity.opacity = 255
+            this.comboTimerOpacity.opacity = 255
             comboLabel.unscheduleAllCallbacks()
             comboLabel.string = `${DataManager.instance.scoreComboDuration}`
             DataManager.instance.scoreComboTime = DataManager.instance.scoreComboDuration
@@ -120,7 +116,7 @@ export default class MainLayer extends BaseLayer {
                 if (num <= 0) {
                     num = 0
                     comboLabel.unscheduleAllCallbacks()
-                    this.comboTimerNumOpacity.opacity = 0
+                    this.comboTimerOpacity.opacity = 0
                 }
                 DataManager.instance.scoreComboTime = num
                 comboLabel.string = `${num}`
@@ -130,6 +126,6 @@ export default class MainLayer extends BaseLayer {
 
     setComboTimerStop() {
         this.comboTimerNum.getComponent(Label).unscheduleAllCallbacks()
-        this.comboTimerNumOpacity.opacity = 0
+        this.comboTimerOpacity.opacity = 0
     }
 }

@@ -14,7 +14,7 @@ const { ccclass, property } = _decorator;
 @ccclass
 export default class MenuLayer extends HeaderLayer {
 
-    btnStart: Node = null
+    btnStartSpeed: Node = null
     btnStartLevel: Node = null
     btnSetting: Node = null
     btnGames: Node = null
@@ -26,12 +26,13 @@ export default class MenuLayer extends HeaderLayer {
 
     onLoad() {
         super.onLoad()
-        this.btnStart = find('buttons/btn_start', this.node)
+        
         this.btnStartLevel = find('buttons/btn_start_level', this.node)
         this.btnSetting = find('buttons/bottom/btn_setting', this.node)
-        this.btnGames = find('buttons/bottom/btn_games', this.node)
-        this.btnShare = find('buttons/bottom/btn_share', this.node)
-        this.btnStart.on('click', this.onStartClick, this)
+        this.btnStartSpeed = find('buttons/btn_start_speed', this.node)
+        // this.btnGames = find('buttons/bottom/btn_games', this.node)
+        // this.btnShare = find('buttons/bottom/btn_share', this.node)
+        // this.btnStart.on('click', this.onStartClick, this)
         this.btnStartLevel.on('click', this.onStartLevelClick, this)
         this.btnSetting.on('click', this.onSettingClick, this)
         this.btnGames.on('click', this.onGamesClick, this)
@@ -46,7 +47,7 @@ export default class MenuLayer extends HeaderLayer {
     }
 
     onDestroy() {
-        this.btnStart.off('click', this.onStartClick, this)
+        // this.btnStart.off('click', this.onStartClick, this)
         this.btnStartLevel.off('click', this.onStartLevelClick, this)
         this.btnSetting.off('click', this.onSettingClick, this)
         this.btnGames.off('click', this.onGamesClick, this)
@@ -57,9 +58,9 @@ export default class MenuLayer extends HeaderLayer {
     }
 
     onEnable() {
-        this.rendorKeys()
-        this.rendorPower()
-        this.rendorPowerTimer()
+        // this.rendorKeys()
+        // this.rendorPower()
+        // this.rendorPowerTimer()
     }
 
     onDisable() { }
@@ -81,6 +82,7 @@ export default class MenuLayer extends HeaderLayer {
     }
 
     onStartClick() {
+        console.log('log:::onStartClick')
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         DataManager.instance.mode = ENUM_GAME_MODE.SCORE
         if (DataManager.instance.power <= 0) {

@@ -14,12 +14,12 @@ export default class BaseLayer extends Component {
     }
 
     zoomIn(node: Node, scale: number = 1.5, speed: number = 0.3) {
-        node.setScale(v3(scale, scale, 0))
-        tween(node).to(speed, {scale: v3(1, 1, 0)}).start()
+        node.setScale(v3(scale, scale, 1))
+        tween(node).to(speed, {scale: v3(1, 1, 1)}).start()
     }
 
     zoomOut(node: Node, scale: number = 0.5, speed: number = 0.3) {
-        node.setScale(v3(scale, scale, 0))
-        tween(node).to(speed, {scale: v3(1, 1, 0)}).start()
+        node.setScale(v3(scale, scale, 1))
+        tween(node).to(speed, {scale: v3(1, 1, 1)}).start()
     }
 }

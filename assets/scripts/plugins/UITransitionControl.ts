@@ -27,48 +27,40 @@ export default class UITransitionControl extends Component {
 
         const size = Math.max(winSize.width, winSize.height)
         this.scale = size / transform.width
-        this.node.setScale(v3(this.scale,this.scale,0))
+        this.node.setScale(v3(this.scale,this.scale))
     }
 
     play(from: ENUM_UI_TYPE = null, to: ENUM_UI_TYPE = null, changed?: () => void, finished?: () => void){
         this.imgOpacity.opacity = 255
-        const _tween = tween(this.node)
-        const act1 = _tween.to(this.transitionTime, {scale: v3(1, 1, 0)})
-        const act2 = _tween.call(()=>{
-            if (from) StaticInstance.uiManager.toggle(from, false)
-            if (to) StaticInstance.uiManager.toggle(to)
-            changed && changed()
-        })
-        const act3 = _tween.to(this.transitionTime, {scale: v3(this.scale,this.scale, 0)})
-        const act4 = tween.call(()=>{
+        tween(this.node).to(this.transitionTime, {scale: v3(1, 1, 1)}).call(()=>{
+              if (from) StaticInstance.uiManager.toggle(from, false)
+              if (to) StaticInstance.uiManager.toggle(to)
+              changed && changed()
+          }).to(this.transitionTime, {scale: v3(this.scale,this.scale, 1)}).call(()=>{
+              this.imgOpacity.opacity = 0
+              finished && finished()
+          }).call(()=>{
             this.imgOpacity.opacity = 0
             finished && finished()
-        })
-        tween(this.node).sequence(act1, act2, act3, act4).start()
+        }).start()
     }
 
     onStart(from: ENUM_UI_TYPE = null, to: ENUM_UI_TYPE = null, callback?: () => void){
         this.imgOpacity.opacity = 255
         const _tween = tween(this.node)
-        const act1 = _tween.to(this.transitionTime, {scale: v3(1, 1, 0)})
-        const act2 = _tween.call(()=>{
-            this.mask.enabled = false
-            if (from) StaticInstance.uiManager.toggle(from, false)
-            if (to) StaticInstance.uiManager.toggle(to)
-            callback && callback()
-        })
-        _tween.sequence(act1, act2).start()
+        _tween.to(this.transitionTime, {scale: v3(1, 1, 1)}).call(()=>{
+          this.mask.enabled = false
+          if (from) StaticInstance.uiManager.toggle(from, false)
+          if (to) StaticInstance.uiManager.toggle(to)
+          callback && callback()
+        }).start()
     }
 
     onEnd(){
         this.scheduleOnce(()=>{
-            this.mask.enabled = true
-            const _tween = tween(this.node)
-            const act1 = _tween.to(this.transitionTime, {scale: v3(1, 1, 0)})
-            const act2 = _tween.call(()=>{
+            tween(this.node).to(this.transitionTime, {scale: v3(1, 1, 1)}).call(()=>{
                 this.imgOpacity.opacity = 0
-            })
-            _tween.sequence(act1, act2).start()
+            }).start()
         })
     }
 }

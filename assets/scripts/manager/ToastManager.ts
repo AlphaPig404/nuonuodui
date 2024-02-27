@@ -74,11 +74,11 @@ export default class ToastManager {
 
       // gravity 设置Toast显示的位置
       if (gravity === "CENTER") {
-        bgNode.setPosition(v3(0, 0, 0))
+        bgNode.setPosition(v3(0, 0))
       } else if (gravity === "TOP") {
-        bgNode.setPosition(v3(bgNode.position.x, bgNode.position.y + (height / 5) * 2, 0))
+        bgNode.setPosition(v3(bgNode.position.x, bgNode.position.y + (height / 5) * 2))
       } else if (gravity === "BOTTOM") {
-        bgNode.setPosition(v3(bgNode.position.x, bgNode.position.y - (height / 5) * 2, 0))
+        bgNode.setPosition(v3(bgNode.position.x, bgNode.position.y - (height / 5) * 2))
       }
 
       canvas.node.addChild(bgNode);

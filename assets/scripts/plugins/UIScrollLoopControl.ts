@@ -124,14 +124,14 @@ export default class UIScrollLoopControl extends Component {
 
             if (this.direction == 0) {
                 startPos.addSelf(v2(itemSize.width * anchor.x, itemSize.height * anchor.y));
-                this.item[i].setPosition(v3(startPos.x + this.offset, 0 , 0))
+                this.item[i].setPosition(v3(startPos.x + this.offset, 0))
                 // log('x:'+startPos.x);
    
                 startPos.addSelf(v2(itemSize.width * anchor.x, itemSize.height * anchor.y));
                 startPos.addSelf(v2(this.itemOffset, this.itemOffset));
             } else {
                 startPos.subSelf(v2(itemSize.width * anchor.x, itemSize.height * anchor.y));
-                this.item[i].setPosition(v3(0+ this.offset, startPos.y + this.offset, 0))
+                this.item[i].setPosition(v3(0+ this.offset, startPos.y + this.offset))
                 startPos.subSelf(v2(itemSize.width * anchor.x, itemSize.height * anchor.y));
                 startPos.subSelf(v2(this.itemOffset, this.itemOffset));
             }
@@ -173,9 +173,9 @@ export default class UIScrollLoopControl extends Component {
             this.itemList.push(item);
 
             if (this.direction == 0) {
-              item.setPosition(v3(endItem.position.x + getNodeWidth(endItem) + this.itemOffset, item.position.y, 0))
+              item.setPosition(v3(endItem.position.x + getNodeWidth(endItem) + this.itemOffset, item.position.y))
             } else {
-              item.setPosition(v3(item.position.x, endItem.position.y - getNodeHeight(endItem)- this.itemOffset, 0))
+              item.setPosition(v3(item.position.x, endItem.position.y - getNodeHeight(endItem)- this.itemOffset))
             }
         }
 
@@ -235,7 +235,7 @@ export default class UIScrollLoopControl extends Component {
             scaleTo *= pre;
             scaleTo += this.scaleMin;
             scaleTo = Math.abs(scaleTo);
-            this.item[i].setScale(v3(scaleTo, scaleTo, 0))
+            this.item[i].setScale(v3(scaleTo, scaleTo, 1))
         }
     }
 
