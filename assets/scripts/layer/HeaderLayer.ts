@@ -16,7 +16,7 @@ export default class HeaderLayer extends BaseLayer {
     barKey: Node = null
     timerPower: Node = null
 
-    onLoad() {
+    onLoad() {      
         this.barPower = find('bar/power', this.node)
         this.barKey = find('bar/key', this.node)
         this.timerPower = find('timer', this.barPower)

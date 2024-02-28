@@ -38,7 +38,6 @@ export default class ExitLayer extends BaseLayer {
     }
 
     onCloseClick() {
-      console.log('log:::onCloseClick')
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         StaticInstance.uiManager.toggle(ENUM_UI_TYPE.EXIT, false)
     }

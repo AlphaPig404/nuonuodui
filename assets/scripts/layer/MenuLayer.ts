@@ -14,7 +14,7 @@ const { ccclass, property } = _decorator;
 @ccclass
 export default class MenuLayer extends HeaderLayer {
 
-    btnStartSpeed: Node = null
+    btnStart: Node = null
     btnStartLevel: Node = null
     btnSetting: Node = null
     btnGames: Node = null
@@ -29,10 +29,10 @@ export default class MenuLayer extends HeaderLayer {
         
         this.btnStartLevel = find('buttons/btn_start_level', this.node)
         this.btnSetting = find('buttons/bottom/btn_setting', this.node)
-        this.btnStartSpeed = find('buttons/btn_start_speed', this.node)
-        // this.btnGames = find('buttons/bottom/btn_games', this.node)
-        // this.btnShare = find('buttons/bottom/btn_share', this.node)
-        // this.btnStart.on('click', this.onStartClick, this)
+        this.btnStart = find('buttons/btn_start', this.node)
+        this.btnGames = find('buttons/bottom/btn_games', this.node)
+        this.btnShare = find('buttons/bottom/btn_share', this.node)
+        this.btnStart.on('click', this.onStartClick, this)
         this.btnStartLevel.on('click', this.onStartLevelClick, this)
         this.btnSetting.on('click', this.onSettingClick, this)
         this.btnGames.on('click', this.onGamesClick, this)
@@ -40,27 +40,21 @@ export default class MenuLayer extends HeaderLayer {
         this.tips = find('main/panel/tips', this.node)
         this.btnRank = find('buttons/btn_rank', this.node)
         this.btnRank.on('click', this.onRankClick, this)
-        // this.btnLeftTip = find('main/btn_left', this.node)
-        // this.btnLeftTip.on('click', this.onTipLeftClick, this)
-        // this.btnRightTip = find('main/btn_right', this.node)
-        // this.btnRightTip.on('click', this.onTipRightClick, this)
     }
 
     onDestroy() {
-        // this.btnStart.off('click', this.onStartClick, this)
+        this.btnStart.off('click', this.onStartClick, this)
         this.btnStartLevel.off('click', this.onStartLevelClick, this)
         this.btnSetting.off('click', this.onSettingClick, this)
         this.btnGames.off('click', this.onGamesClick, this)
         this.btnShare.off('click', this.onShareClick, this)
         this.btnRank.off('click', this.onRankClick, this)
-        this.btnLeftTip.on('click', this.onTipLeftClick, this)
-        this.btnLeftTip.on('click', this.onTipRightClick, this)
     }
 
     onEnable() {
-        // this.rendorKeys()
-        // this.rendorPower()
-        // this.rendorPowerTimer()
+      this.rendorKeys()
+      this.rendorPower()
+      this.rendorPowerTimer()
     }
 
     onDisable() { }
@@ -82,7 +76,6 @@ export default class MenuLayer extends HeaderLayer {
     }
 
     onStartClick() {
-        console.log('log:::onStartClick')
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         DataManager.instance.mode = ENUM_GAME_MODE.SCORE
         if (DataManager.instance.power <= 0) {

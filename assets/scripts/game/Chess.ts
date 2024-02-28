@@ -19,7 +19,7 @@ export default class Chess extends Component {
     touchPos: Vec2 = null
     startPos: Vec2 = null
     // 移动阀值：达到才算开始移动
-    moveSafetyDis: number = 0.1
+    moveSafetyDis: number = 2
     // 移动方向
     moveDir: Vec2 = v2(0, 0)
     // 是否移动
@@ -73,13 +73,12 @@ export default class Chess extends Component {
     }
 
     onTouchStart(e: Touch) {
-      console.log('log:::onTouchStart')
         if (this.isClear || DataManager.instance.isChecking || DataManager.instance.isShuffling || DataManager.instance.isTouching) return
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.TOUCH)
         DataManager.instance.isTouching = true
         DataManager.instance.currentChess = this
         DataManager.instance.tipTime = 0
-        const touchPos = e.getLocation()
+        const touchPos = e.getUILocation()
         const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y))
         this.touchPos = v2(pos.x, pos.y)
         const startPos = this.node.getPosition()
@@ -98,8 +97,12 @@ export default class Chess extends Component {
         if (this.isClear || DataManager.instance.activeChesses || DataManager.instance.isChecking || DataManager.instance.isShuffling) return
         if (DataManager.instance.currentChess == this) {
             const touchPos = e.getLocation()
-            const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y))
-            console.log('log:::e', pos, touchPos)
+            const touchPos2 = e.getUILocation()
+            const touchPos3 = e.getLocationInView()
+
+            // const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos.x, touchPos.y))
+            const pos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos2.x, touchPos2.y))
+            // const pos3 = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(v3(touchPos3.x, touchPos3.y))
             // 开始移动
             if (this.isMoving) {
                 // front移动
@@ -143,28 +146,20 @@ export default class Chess extends Component {
             // 判断是否可以移动
             if (this.moveDir.x != 0 || this.moveDir.y != 0) {
                 const chesses = this.searchMove()
-                console.log('log:::chesses', chesses)
                 if (chesses) {
                     DataManager.instance.frontChesses = chesses.frontChesses
                     DataManager.instance.backChesses = chesses.backChesses
                     this.isMoving = true
                     DataManager.instance.zIndex += 1
                     DataManager.instance.frontChesses.forEach(chess => chess.node.setSiblingIndex(DataManager.instance.chessNums.total))
-                    console.log('log:::zIndex', DataManager.instance.zIndex)
                 }
                 return
             }
             // 判断移动方向
             if (this.touchPos) {
                 const dis = getDistance(this.touchPos, v2(pos.x, pos.y))
-                console.log('log:::dis', dis)
                 if (dis >= this.moveSafetyDis) {
                     const angle = Math.abs(getAngle(this.touchPos, v2(pos.x, pos.y)))
-                    console.log('log:::angle', {
-                      angle,
-                      x: this.touchPos.x - pos.x,
-                      y: this.touchPos.y - pos.y
-                    })
                     if (angle > 45 && angle < 135) {
                         this.moveDir.x = 0
                         if (this.touchPos.y - pos.y > 0) {
@@ -181,7 +176,6 @@ export default class Chess extends Component {
                         }
                     }
                 }
-                // console.log(this.moveDir.x, this.moveDir.y)
             }
         }
     }
@@ -273,7 +267,6 @@ export default class Chess extends Component {
                 score = DataManager.instance.scoreUnit * scoreFate
                 eff_score = `+${score}`
             }
-            // console.log(scoreFate, score)
             let count = 0
             chesses.forEach(chess => {
                 chess.node.getChildByName('eff_score').getComponent(Label).string = `${eff_score}`

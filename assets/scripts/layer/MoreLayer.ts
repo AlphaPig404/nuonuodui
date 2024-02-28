@@ -1,5 +1,3 @@
-// Created by carolsail
-
 import { ENUM_AUDIO_CLIP, ENUM_UI_TYPE } from "../Enum";
 import { StaticInstance } from './../StaticInstance';
 import AudioManager from "../manager/AudioManager";

@@ -21,28 +21,27 @@ export default class UITransitionControl extends Component {
         const winSize = screen;
         this.mask = this.node.getComponent(Mask)
         this.img = this.node.getChildByName('img')
-        this.imgOpacity = this.img.addComponent(UIOpacity)
-        const transform = this.img.getComponent(UITransform)
-        transform.setContentSize(math.size(winSize.width, winSize.height))
+        this.imgOpacity = this.img.getComponent(UIOpacity)
+        const transform = this.node.getComponent(UITransform)
+        const imgTransform = this.img.getComponent(UITransform)
+        imgTransform.setContentSize(math.size(winSize.width, winSize.height))
 
         const size = Math.max(winSize.width, winSize.height)
-        this.scale = size / transform.width
-        this.node.setScale(v3(this.scale,this.scale))
+        this.scale = size * 2 / transform.width
+        console.log('log:::this.scale', this.scale, size, winSize)
+        this.node.setScale(v3(this.scale, this.scale))
     }
 
     play(from: ENUM_UI_TYPE = null, to: ENUM_UI_TYPE = null, changed?: () => void, finished?: () => void){
-        this.imgOpacity.opacity = 255
+        this.imgOpacity.opacity = 0
         tween(this.node).to(this.transitionTime, {scale: v3(1, 1, 1)}).call(()=>{
               if (from) StaticInstance.uiManager.toggle(from, false)
               if (to) StaticInstance.uiManager.toggle(to)
               changed && changed()
-          }).to(this.transitionTime, {scale: v3(this.scale,this.scale, 1)}).call(()=>{
+          }).to(this.transitionTime, {scale: v3(this.scale, this.scale, 1)}).call(()=>{
               this.imgOpacity.opacity = 0
               finished && finished()
-          }).call(()=>{
-            this.imgOpacity.opacity = 0
-            finished && finished()
-        }).start()
+          }).start()
     }
 
     onStart(from: ENUM_UI_TYPE = null, to: ENUM_UI_TYPE = null, callback?: () => void){

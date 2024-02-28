@@ -67,11 +67,7 @@ export default class DataManager {
     _isSoundOn: boolean = true
     // 更多游戏
     games: any[] = [
-        { title: '消灭星星', icon: 'xiao2d', appid: 'wxefd5a4ddd8e31b44', url: 'https://store.cocos.com/app/detail/4183' },
-        { title: '实况足球杯', icon: 'football', appid: 'wx0c16e9d7f9e87dac', url: 'https://store.cocos.com/app/detail/4221' },
-        { title: '爬了个爬', icon: 'stairway', appid: 'wx025bcf3a316bfa27', url: 'https://store.cocos.com/app/detail/4314' },
-        { title: '咩了个咩3D', icon: 'xiao3d', appid: 'wx5841e5a26082b380', url: 'https://store.cocos.com/app/detail/4148' },
-        { title: '经典泡泡龙', icon: 'bubble', appid: 'wxcc2f90afdf28ae3b', url: 'https://store.cocos.com/app/detail/4370' },
+      // { title: '消灭星星', icon: 'xiao2d', appid: 'wxefd5a4ddd8e31b44', url: 'https://store.cocos.com/app/detail/4183' }
     ]
     // 关卡
     level: number = 1

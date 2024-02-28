@@ -1,4 +1,5 @@
-import { Canvas, Graphics, Label, Node, UIOpacity, UITransform, color, director, tween, v3 } from "cc";
+import { Canvas, Graphics, Label, Node, Sprite, UIOpacity, UITransform, color, director, tween, v3 } from "cc";
+import ResourceManager from "./ResourceManager";
 
 export default class ToastManager {
 
@@ -48,27 +49,11 @@ export default class ToastManager {
           textTransition.height = textLabel.fontSize * lineCount;
 
       // 背景设置
-      let ctx = bgNode.addComponent(Graphics);
-      ctx.arc(
-          -textTransition.width / 2,
-          0,
-          textTransition.height / 2 + 20,
-          0.5 * Math.PI,
-          1.5 * Math.PI,
-          true
-      );
-      ctx.lineTo(textTransition.width / 2, -(textTransition.height / 2 + 20));
-      ctx.arc(
-          textTransition.width / 2,
-          0,
-          textTransition.height / 2 + 20,
-          1.5 * Math.PI,
-          0.5 * Math.PI,
-          true
-      );
-      ctx.lineTo(-textTransition.width / 2, textTransition.height / 2 + 20);
-      ctx.fillColor = bg_color;
-      ctx.fill();
+      const sprite = bgNode.addComponent(Sprite)
+      sprite.spriteFrame = ResourceManager.instance.getSprite('toast_bg')
+      sprite.color = bg_color
+      const bgTransform = bgNode.getComponent(UITransform)
+      bgTransform.setContentSize(textTransition.width + 20, textTransition.height + 10)
 
       bgNode.addChild(textNode);
 
@@ -81,14 +66,13 @@ export default class ToastManager {
         bgNode.setPosition(v3(bgNode.position.x, bgNode.position.y - (height / 5) * 2))
       }
 
+      bgNode.addComponent(UIOpacity).opacity = 255
       canvas.node.addChild(bgNode);
       // 执行动画
       let finished = function() {
           bgNode.destroy();
       };
-      const fadeOut = tween(bgNode.getComponent(UIOpacity)).to(0.3, {opacity: 0})
-      // const action0 = tween(bgNode).to(duration, {position: v3(0, 0,0)})
-      // bgNode.runAction(action); 
-      fadeOut.start().call(finished)
+      const fadeOut = tween(bgNode.getComponent(UIOpacity)).delay(duration).to(0.3, {opacity: 0})
+      fadeOut.call(finished).start()
   }
 }

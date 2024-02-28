@@ -15,11 +15,9 @@ export default class UIManager extends Component {
 
     protected onLoad(): void {
         StaticInstance.setUIManager(this)
-        console.log('log:::UIManager', 'onLoad')
     }
 
     init() {
-       console.log('log:::UIManager', 'init')
         for (let type in ENUM_UI_TYPE) {
             const node: Node = PoolManager.instance.getNode(ENUM_UI_TYPE[type], this.node)
             if (node && !this.uiMap.has(ENUM_UI_TYPE[type])) {
@@ -34,7 +32,6 @@ export default class UIManager extends Component {
         if (this.uiMap.has(key)) {
             const layer = this.uiMap.get(key)
             status ? layer.show() : layer.hide()
-            console.log('log:::layer', layer, status, layer.node.active)
             callback && callback()
         }
     }

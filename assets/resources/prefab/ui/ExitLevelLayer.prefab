@@ -433,7 +433,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 170.5022624567956,
       "height": 52.4
     },
     "_anchorPoint": {
@@ -463,9 +463,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 213,
-      "g": 181,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_string": "放弃挑战",
@@ -480,8 +480,8 @@
     "_font": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_isItalic": false,
-    "_isBold": false,
+    "_isItalic": true,
+    "_isBold": true,
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
@@ -504,9 +504,9 @@
     },
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 12,
+      "g": 46,
+      "b": 42,
       "a": 255
     },
     "_width": 1,
@@ -774,9 +774,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 12,
+      "g": 46,
+      "b": 42,
       "a": 255
     },
     "_string": "是",
@@ -1022,7 +1022,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 100,
+      "x": 120,
       "y": 0,
       "z": 0
     },
@@ -1144,9 +1144,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 12,
+      "g": 46,
+      "b": 42,
       "a": 255
     },
     "_string": "否",
@@ -1413,7 +1413,7 @@
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": 0,
+    "_spacingX": 20,
     "_spacingY": 0,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,

@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "5a6a229c-77af-476e-91a0-9b510e7dd977",
+  "uuid": "46232df4-8aa9-451d-a9ff-409cbf694e01",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "RankLayer"
+    "syncNodeName": "Touch"
   }
 }

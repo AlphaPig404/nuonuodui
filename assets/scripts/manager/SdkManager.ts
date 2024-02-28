@@ -12,15 +12,15 @@ export default class SdkManager {
     }
 
     shareTitle: string = '好玩上头的游戏，你敢接受挑战吗？'
-    shareImg: string = 'https://download.cocos.com/CocosStore/icon/7b5b8ebf3c6e4d1282605174cc5d5966/7b5b8ebf3c6e4d1282605174cc5d5966.png'
+    shareImg: string = ''
     // 激励视频
-    videoId: string = ''
+    videoId: string = 'adunit-3619e383547893df'
     private videoAd = null
     // 插屏
-    interstitialId: string = ''
+    interstitialId: string = 'adunit-f87ad30d987e6c63'
     private interstitialAd = null
     // 横幅
-    bannerId: string = ''
+    bannerId: string = 'adunit-3d1ef010ed4fc290'
     private bannerAd = null
     // 原生格子: 横向（后台90%显示）
     customRowId: string = ''
@@ -138,24 +138,29 @@ export default class SdkManager {
         }
         let winSize = platform.getSystemInfoSync();
         if (this.bannerAd == null) {
+          try{
             this.bannerAd = platform.createBannerAd({
-                adUnitId: this.bannerId,
-                adIntervals: 30,
-                style: {
-                    height: winSize.windowHeight - 80,
-                    left: 0,
-                    top: 500,
-                    width: winSize.windowWidth
-                }
-            });
-            this.bannerAd.onResize((res: any) => {
-                this.bannerAd.style.top = winSize.windowHeight - this.bannerAd.style.realHeight;
-                this.bannerAd.style.left = winSize.windowWidth / 2 - this.bannerAd.style.realWidth / 2;
-            });
-            this.bannerAd.onError((err: any) => {
-                console.error('【流量主横幅】初始化有误')
-            });
+              adUnitId: this.bannerId,
+              adIntervals: 30,
+              style: {
+                  height: winSize.windowHeight - 80,
+                  left: 0,
+                  top: 500,
+                  width: winSize.windowWidth
+              }
+          });
+          this.bannerAd.onResize((res: any) => {
+              this.bannerAd.style.top = winSize.windowHeight - this.bannerAd.style.realHeight;
+              this.bannerAd.style.left = winSize.windowWidth / 2 - this.bannerAd.style.realWidth / 2;
+          });
+          this.bannerAd.onError((err: any) => {
+              console.error('【流量主横幅】初始化有误', err)
+          });
+        }catch(e){
+            console.log('log:::e', e)
         }
+            
+      }
     }
 
     // 横幅展示

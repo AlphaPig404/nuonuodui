@@ -31,7 +31,7 @@ export default class MainLayer extends BaseLayer {
         this.btnTip.on('click', this.onTipClick, this)
         this.levelUpNode = find('level_up', this.node)
         this.scoreNode = find('bar_score/nums', this.node)
-        this.particle = find('bar_score/particle', this.node)
+        this.particle = find('bar_score/icon/particle', this.node)
         this.comboTimer = find('combo_timer', this.node)
         this.comboTimerNum = find('timer/nums', this.comboTimer)
         this.comboTimerOpacity = this.comboTimer.getComponent(UIOpacity)

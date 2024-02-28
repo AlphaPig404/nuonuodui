@@ -18,7 +18,6 @@ export default class GameManager extends Component {
     onLoad() {
         StaticInstance.setGameManager(this)
         this.stage = find('Stage', this.node)
-        console.log('log:::GameManager', 'onLoad')
     }
 
     onDestroy() { }
@@ -199,7 +198,6 @@ export default class GameManager extends Component {
                   chess.setEffect('eff_hand', true)
                   // DataManager.instance.zIndex += 1
                   chess.node.setSiblingIndex(DataManager.instance.chessNums.total)
-                  console.log('log:::eff_hand', DataManager.instance.chessNums.total)
                 }
                 chess.setEffect('eff_tip', true)
             }

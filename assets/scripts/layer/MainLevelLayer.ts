@@ -42,7 +42,7 @@ export default class MainLevelLayer extends BaseLayer {
     }
 
     rendorLevel() {
-        this.levelNum.getComponent(Label).string = `${DataManager.instance.levelCount}`
+        this.levelNum.getComponent(Label).string = `第${DataManager.instance.levelCount}关`
     }
 
     onPauseClick() {

@@ -150,7 +150,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 4,
       "z": 0
     },
     "_lrot": {
@@ -349,7 +349,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -528,7 +528,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -132.5,
+      "x": -150,
       "y": 0,
       "z": 0
     },
@@ -647,9 +647,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 79,
-      "g": 56,
-      "b": 49,
+      "r": 12,
+      "g": 46,
+      "b": 42,
       "a": 255
     },
     "_string": "洗牌",
@@ -834,8 +834,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 165,
-      "height": 69
+      "width": 200,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -870,12 +870,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "35839d9c-d2c2-4786-ae51-47871c315487@f9941",
+      "__uuid__": "9e19ea34-68a9-4603-8355-06561f0bfd28@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -935,7 +935,7 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "35839d9c-d2c2-4786-ae51-47871c315487@f9941",
+      "__uuid__": "9e19ea34-68a9-4603-8355-06561f0bfd28@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_hoverSprite": null,
@@ -995,7 +995,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 132.5,
+      "x": 150,
       "y": 0,
       "z": 0
     },
@@ -1114,9 +1114,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 79,
-      "g": 56,
-      "b": 49,
+      "r": 12,
+      "g": 46,
+      "b": 42,
       "a": 255
     },
     "_string": "提示",
@@ -1301,8 +1301,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 165,
-      "height": 69
+      "width": 200,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1337,12 +1337,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "35839d9c-d2c2-4786-ae51-47871c315487@f9941",
+      "__uuid__": "9e19ea34-68a9-4603-8355-06561f0bfd28@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1402,7 +1402,7 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "35839d9c-d2c2-4786-ae51-47871c315487@f9941",
+      "__uuid__": "9e19ea34-68a9-4603-8355-06561f0bfd28@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_hoverSprite": null,
@@ -1443,7 +1443,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 430,
+      "width": 500,
       "height": 173
     },
     "_anchorPoint": {
@@ -1621,7 +1621,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 4,
       "z": 0
     },
     "_lrot": {
@@ -1660,7 +1660,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 22.25,
+      "width": 83.05669684259671,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1695,11 +1695,11 @@
       "b": 255,
       "a": 255
     },
-    "_string": "1",
+    "_string": "第1关",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
+    "_actualFontSize": 30,
+    "_fontSize": 30,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 0,
@@ -1707,7 +1707,7 @@
     "_font": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_isItalic": false,
+    "_isItalic": true,
     "_isBold": false,
     "_isUnderline": false,
     "_underlineHeight": 2,

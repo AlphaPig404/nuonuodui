@@ -24,19 +24,19 @@ export default class OverLayer extends BaseLayer {
         this.panel = find('style/panel', this.node)
         this.btnRestart = find('buttons/btn_restart', this.panel)
         this.btnShare = find('buttons/btn_share', this.panel)
-        this.btnRestart.on('click', this.onRestartClick, this)
+        this.btnRestart.on('click',this.onCloseClick, this)
         this.btnShare.on('click', this.onShareClick, this)
         this.scoreNode = find('score', this.panel)
         this.noticeNode = find('notice', this.panel)
         this.particles = find('particles', this.panel)
         this.btnClose = find('btn_close', this.panel)
-        this.btnClose.on('click', this.onCloseClick, this)
+        this.btnClose.on('click', this.onRestartClick, this)
     }
 
     onDestroy() {
-        this.btnRestart.off('click', this.onRestartClick, this)
+        this.btnRestart.off('click', this.onCloseClick, this)
         this.btnShare.off('click', this.onShareClick, this)
-        this.btnClose.off('click', this.onCloseClick, this)
+        this.btnClose.off('click',this.onRestartClick, this)
     }
 
     onEnable() {
